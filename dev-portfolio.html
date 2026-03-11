@@ -1,0 +1,1088 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Dev Yadav — Dreamer & Builder</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,700;0,900;1,300;1,700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Dancing+Script:wght@500;700&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --sky1:#dff4ff;--sky2:#b8e6ff;--white:#ffffff;
+  --ink:#0d1b2a;--ink2:#2c3e50;--muted:#6b8cae;
+  --accent:#0284c7;--accent2:#f97316;--accent3:#06b6d4;
+  --love1:#ff1744;--love2:#ff4d7d;--love3:#ff8fab;
+  --card:rgba(255,255,255,0.72);--border:rgba(2,132,199,0.13);
+  --shadow:rgba(2,132,199,0.10);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  background:linear-gradient(160deg,#fff 0%,#dff4ff 30%,#b8e6ff 60%,#e0f2fe 100%);
+  min-height:100vh;font-family:'Plus Jakarta Sans',sans-serif;
+  color:var(--ink);overflow-x:hidden;cursor:default;
+}
+
+/* ── CLOUDS ── */
+.clouds{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden;}
+.cloud{position:absolute;border-radius:50%;
+  background:radial-gradient(circle,rgba(255,255,255,.9) 0%,rgba(255,255,255,0) 70%);
+  animation:floatCloud linear infinite;filter:blur(2px);}
+.cloud:nth-child(1){width:400px;height:200px;top:8%;left:-10%;opacity:.5;animation-duration:35s;}
+.cloud:nth-child(2){width:300px;height:140px;top:20%;left:60%;opacity:.4;animation-duration:50s;animation-delay:-10s;}
+.cloud:nth-child(3){width:500px;height:220px;top:50%;left:-5%;opacity:.3;animation-duration:60s;animation-delay:-20s;}
+.cloud:nth-child(4){width:250px;height:100px;top:70%;left:70%;opacity:.5;animation-duration:40s;animation-delay:-5s;}
+.cloud:nth-child(5){width:350px;height:160px;top:85%;left:30%;opacity:.3;animation-duration:55s;animation-delay:-15s;}
+@keyframes floatCloud{from{transform:translateX(-100px);}to{transform:translateX(calc(100vw + 200px));}}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;width:100%;z-index:200;display:flex;justify-content:space-between;align-items:center;
+  padding:1rem 3rem;background:rgba(255,255,255,.65);backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);transition:all .3s;}
+nav.scrolled{background:rgba(255,255,255,.9);box-shadow:0 4px 20px rgba(0,0,0,.08);}
+.logo{font-family:'Fraunces',serif;font-size:1.6rem;font-weight:900;color:var(--accent);letter-spacing:-1px;text-decoration:none;}
+.logo span{color:var(--accent2);font-style:italic;}
+.nav-links{display:flex;gap:0.3rem;list-style:none;}
+.nav-links a{
+  color:var(--muted);text-decoration:none;font-size:.78rem;font-weight:600;
+  letter-spacing:.5px;text-transform:uppercase;padding:.5rem .9rem;border-radius:8px;
+  transition:all .25s;position:relative;
+}
+.nav-links a:hover,.nav-links a.active{color:var(--accent);background:rgba(2,132,199,.08);}
+.nav-links a.love-link{color:var(--love1);}
+.nav-links a.love-link:hover{background:rgba(255,107,157,.08);color:var(--love1);}
+
+/* ── PROGRESS BAR ── */
+#progress{position:fixed;top:0;left:0;height:3px;width:0%;
+  background:linear-gradient(90deg,var(--accent),var(--accent3));z-index:9999;transition:width .1s;}
+
+/* ── SECTIONS ── */
+section{position:relative;z-index:1;}
+
+/* ── HERO ── */
+#hero{min-height:100vh;display:flex;align-items:center;padding:7rem 3rem 3rem;}
+.hero-inner{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;width:100%;max-width:1100px;margin:0 auto;}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:.5rem;
+  background:rgba(2,132,199,.1);border:1px solid rgba(2,132,199,.2);
+  padding:.35rem 1rem;border-radius:999px;font-size:.75rem;color:var(--accent);
+  font-weight:600;letter-spacing:1px;text-transform:uppercase;margin-bottom:1.5rem;
+  opacity:0;animation:fadeUp .6s .2s forwards;}
+.hero-name{font-family:'Fraunces',serif;font-size:clamp(3rem,8vw,6.5rem);
+  font-weight:900;line-height:.95;letter-spacing:-4px;
+  opacity:0;animation:fadeUp .7s .4s forwards;position:relative;}
+.hero-name .first{
+  display:block;
+  background:linear-gradient(135deg,#0d1b2a 0%,#1e40af 40%,#0284c7 60%,#0d1b2a 100%);
+  background-size:200% auto;
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  animation:fadeUp .7s .4s forwards, nameShine 4s linear 1.2s infinite;
+}
+.hero-name .last{
+  display:block;
+  font-style:italic;
+  background:linear-gradient(135deg,#b45309 0%,#d97706 20%,#fbbf24 40%,#f59e0b 60%,#d97706 80%,#b45309 100%);
+  background-size:200% auto;
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  animation:fadeUp .7s .4s forwards, goldShine 3s linear 1.5s infinite;
+  filter:drop-shadow(0 2px 12px rgba(217,119,6,.35));
+}
+@keyframes nameShine{
+  0%{background-position:0% center;}
+  100%{background-position:200% center;}
+}
+@keyframes goldShine{
+  0%{background-position:0% center;filter:drop-shadow(0 2px 12px rgba(217,119,6,.35));}
+  50%{filter:drop-shadow(0 2px 24px rgba(251,191,36,.6));}
+  100%{background-position:200% center;filter:drop-shadow(0 2px 12px rgba(217,119,6,.35));}
+}
+.hero-title{margin-top:1.2rem;font-size:1rem;color:var(--accent2);font-weight:700;
+  letter-spacing:2px;text-transform:uppercase;opacity:0;animation:fadeUp .7s .6s forwards;}
+.hero-desc{margin-top:1rem;font-size:1.05rem;color:var(--muted);line-height:1.9;max-width:460px;
+  opacity:0;animation:fadeUp .7s .7s forwards;}
+.hero-desc strong{color:var(--ink2);}
+.hero-btns{margin-top:2rem;display:flex;gap:1rem;flex-wrap:wrap;
+  opacity:0;animation:fadeUp .7s .9s forwards;}
+
+/* Buttons */
+.btn{padding:.75rem 1.8rem;border-radius:10px;font-family:'Plus Jakarta Sans',sans-serif;
+  font-weight:700;font-size:.88rem;cursor:pointer;text-decoration:none;
+  transition:all .3s;display:inline-flex;align-items:center;gap:.5rem;border:none;}
+.btn-primary{background:var(--accent);color:#fff;box-shadow:0 8px 24px rgba(2,132,199,.3);}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(2,132,199,.45);}
+.btn-outline{background:transparent;color:var(--accent);border:2px solid var(--accent);}
+.btn-outline:hover{background:var(--accent);color:#fff;transform:translateY(-2px);}
+.btn-whatsapp{background:linear-gradient(135deg,#25d366,#128c7e);color:#fff;
+  box-shadow:0 8px 24px rgba(37,211,102,.35);padding:.75rem 1.8rem;border-radius:10px;
+  font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:.88rem;cursor:pointer;
+  text-decoration:none;transition:all .3s;display:inline-flex;align-items:center;gap:.5rem;border:none;}
+.btn-whatsapp:hover{transform:translateY(-2px);box-shadow:0 12px 36px rgba(37,211,102,.5);}
+.wa-icon{width:20px;height:20px;fill:#fff;}
+
+/* Photo Card */
+.photo-card{background:var(--card);border:2px dashed rgba(2,132,199,.3);border-radius:28px;
+  padding:2.5rem;display:flex;flex-direction:column;align-items:center;gap:1.2rem;
+  backdrop-filter:blur(12px);box-shadow:0 20px 60px var(--shadow);
+  transition:border-color .3s,box-shadow .3s;cursor:pointer;
+  opacity:0;animation:fadeUp .7s .5s forwards;position:relative;overflow:hidden;}
+.photo-card:hover{border-color:var(--accent);box-shadow:0 24px 80px rgba(2,132,199,.2);}
+.photo-card.has-photo{border-style:solid;border-color:var(--accent);}
+#photoPreview{width:200px;height:200px;border-radius:50%;object-fit:cover;display:none;
+  border:4px solid var(--accent);box-shadow:0 8px 32px rgba(2,132,199,.25);}
+.photo-placeholder{width:200px;height:200px;border-radius:50%;
+  background:linear-gradient(135deg,#dff4ff,#b8e6ff);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.5rem;
+  border:3px dashed rgba(2,132,199,.3);}
+.photo-placeholder-icon{font-size:3rem;}
+.photo-placeholder-text{font-size:.8rem;color:var(--muted);font-weight:600;text-align:center;}
+.photo-upload-btn{background:linear-gradient(135deg,var(--accent),var(--accent3));color:#fff;
+  border:none;padding:.6rem 1.5rem;border-radius:8px;font-family:'Plus Jakarta Sans',sans-serif;
+  font-weight:600;font-size:.82rem;cursor:pointer;transition:all .3s;}
+.photo-upload-btn:hover{transform:scale(1.04);}
+#fileInput{display:none;}
+.photo-badge{position:absolute;top:1rem;right:1rem;background:var(--accent2);color:#fff;
+  font-size:.65rem;font-weight:700;padding:.2rem .6rem;border-radius:999px;letter-spacing:1px;text-transform:uppercase;}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+
+/* ── SECTION COMMONS ── */
+.section-chip{display:inline-block;background:linear-gradient(135deg,var(--accent),var(--accent3));
+  color:#fff;padding:.3rem 1rem;border-radius:999px;font-size:.7rem;font-weight:700;
+  letter-spacing:2px;text-transform:uppercase;margin-bottom:1rem;}
+.section-title{font-family:'Fraunces',serif;font-size:clamp(2.2rem,5vw,3.5rem);
+  font-weight:900;letter-spacing:-2px;color:var(--ink);margin-bottom:2.5rem;line-height:1.1;}
+.section-title em{color:var(--accent);font-style:italic;}
+
+/* ── ABOUT ── */
+#about{padding:5rem 3rem;background:rgba(255,255,255,.5);backdrop-filter:blur(8px);}
+.about-inner{max-width:1000px;margin:0 auto;}
+.about-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:3rem;align-items:start;}
+.about-text{font-size:1rem;color:var(--muted);line-height:1.9;}
+.about-text p{margin-bottom:1.2rem;}
+.about-text strong{color:var(--ink2);}
+.about-text .highlight{background:linear-gradient(120deg,rgba(2,132,199,.15) 0%,rgba(6,182,212,.1) 100%);
+  border-left:3px solid var(--accent);padding:1rem 1.2rem;border-radius:0 10px 10px 0;
+  margin:1.5rem 0;color:var(--ink2);font-style:italic;font-size:1.05rem;}
+.stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+.stat-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:1.4rem;
+  backdrop-filter:blur(12px);box-shadow:0 4px 20px var(--shadow);
+  transition:transform .3s,box-shadow .3s;text-align:center;}
+.stat-card:hover{transform:translateY(-3px);box-shadow:0 12px 36px rgba(2,132,199,.15);}
+.stat-icon{font-size:1.8rem;margin-bottom:.4rem;}
+.stat-val{font-family:'Fraunces',serif;font-size:1.6rem;font-weight:900;color:var(--accent);}
+.stat-label{font-size:.72rem;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:1px;margin-top:.2rem;}
+
+/* ── HOBBIES ── */
+#hobbies{padding:5rem 3rem;}
+.hobbies-inner{max-width:1000px;margin:0 auto;}
+.hobbies-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:2.5rem;}
+.hobby-card{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:2rem;
+  backdrop-filter:blur(12px);box-shadow:0 4px 20px var(--shadow);transition:all .3s;position:relative;overflow:hidden;}
+.hobby-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--accent),var(--accent3));
+  transform:scaleX(0);transform-origin:left;transition:transform .4s ease;}
+.hobby-card:hover{transform:translateY(-5px);box-shadow:0 20px 50px rgba(2,132,199,.18);}
+.hobby-card:hover::after{transform:scaleX(1);}
+.hobby-emoji{font-size:2.5rem;margin-bottom:1rem;}
+.hobby-name{font-family:'Fraunces',serif;font-size:1.3rem;font-weight:700;color:var(--ink);margin-bottom:.5rem;}
+.hobby-desc{font-size:.85rem;color:var(--muted);line-height:1.7;}
+
+/* ── MINDSET SECTION ── */
+#mindset{
+  padding:6rem 3rem;
+  background:linear-gradient(160deg,#0c4a6e 0%,#075985 35%,#0369a1 65%,#0c4a6e 100%);
+  position:relative;overflow:hidden;
+}
+/* Dot canvas bg */
+#mindset-canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;}
+.mindset-inner{max-width:1000px;margin:0 auto;position:relative;z-index:1;}
+.mindset-chip{display:inline-block;background:rgba(255,255,255,.12);color:#bae6fd;
+  padding:.3rem 1rem;border-radius:999px;font-size:.7rem;font-weight:700;
+  letter-spacing:2px;text-transform:uppercase;border:1px solid rgba(186,230,253,.25);margin-bottom:1rem;}
+.mindset-title{font-family:'Fraunces',serif;font-size:clamp(2rem,5vw,3.5rem);
+  font-weight:900;color:#fff;letter-spacing:-2px;margin-bottom:.8rem;line-height:1.1;}
+.mindset-title em{
+  background:linear-gradient(135deg,#7dd3fc,#38bdf8,#0ea5e9);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  filter:drop-shadow(0 0 12px rgba(56,189,248,.5));
+}
+.mindset-sub{color:rgba(255,255,255,.6);font-size:1rem;line-height:1.8;max-width:600px;margin-bottom:3rem;}
+.mindset-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem;}
+.mindset-card{
+  background:rgba(255,255,255,.07);border:1px solid rgba(186,230,253,.18);
+  border-radius:20px;padding:2rem;transition:all .3s;position:relative;overflow:hidden;
+  cursor:pointer;
+}
+.mindset-card::before{
+  content:'';position:absolute;inset:0;border-radius:20px;
+  background:radial-gradient(circle at 50% 50%,rgba(56,189,248,.12),transparent 70%);
+  opacity:0;transition:opacity .3s;
+}
+.mindset-card:hover{border-color:rgba(125,211,252,.5);transform:translateY(-4px);
+  box-shadow:0 16px 40px rgba(2,132,199,.3);}
+.mindset-card:hover::before{opacity:1;}
+
+/* Dot cursor on mindset cards */
+.mindset-card .dot-cursor{
+  position:absolute;width:12px;height:12px;border-radius:50%;
+  background:rgba(56,189,248,0.9);pointer-events:none;
+  transform:translate(-50%,-50%);transition:opacity .2s;opacity:0;
+  box-shadow:0 0 20px rgba(56,189,248,.9);
+}
+
+.mindset-num{font-family:'Fraunces',serif;font-size:3rem;font-weight:900;
+  color:rgba(186,230,253,.12);line-height:1;margin-bottom:.8rem;}
+.mindset-icon{font-size:2rem;margin-bottom:.8rem;}
+.mindset-card-title{font-size:1.05rem;font-weight:700;color:#f0f9ff;margin-bottom:.5rem;}
+.mindset-card-desc{font-size:.85rem;color:rgba(255,255,255,.58);line-height:1.7;}
+.mindset-tag{display:inline-block;margin-top:.8rem;padding:.2rem .7rem;border-radius:999px;
+  background:rgba(14,165,233,.2);border:1px solid rgba(56,189,248,.25);
+  font-size:.65rem;color:#7dd3fc;font-weight:600;letter-spacing:1px;text-transform:uppercase;}
+
+/* Touch hint */
+.mindset-hint{text-align:center;margin-top:2rem;font-size:.75rem;color:rgba(255,255,255,.35);
+  display:flex;align-items:center;justify-content:center;gap:.5rem;}
+.mindset-hint-dot{width:6px;height:6px;border-radius:50%;background:rgba(56,189,248,.6);
+  animation:pulseDot 2s ease-in-out infinite;}
+@keyframes pulseDot{0%,100%{transform:scale(1);opacity:.5;}50%{transform:scale(1.5);opacity:1;}}
+
+/* ── AI TOOLS ── */
+#aitools{
+  padding:5rem 3rem;
+  background:linear-gradient(135deg,#0284c7 0%,#0ea5e9 50%,#06b6d4 100%);
+  position:relative;overflow:hidden;
+}
+#aitools::before{content:'';position:absolute;inset:0;
+  background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/svg%3E");}
+.aitools-inner{max-width:1000px;margin:0 auto;position:relative;z-index:1;}
+.ai-chip{display:inline-block;background:rgba(255,255,255,.2);color:#fff;
+  padding:.3rem 1rem;border-radius:999px;font-size:.7rem;font-weight:700;
+  letter-spacing:2px;text-transform:uppercase;border:1px solid rgba(255,255,255,.3);margin-bottom:1rem;}
+.ai-title{font-family:'Fraunces',serif;font-size:clamp(2rem,5vw,3rem);
+  font-weight:900;color:#fff;letter-spacing:-2px;margin-bottom:.8rem;line-height:1.1;}
+.ai-sub{color:rgba(255,255,255,.75);font-size:.95rem;line-height:1.8;max-width:600px;margin-bottom:3rem;}
+.ai-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;}
+.ai-card{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);
+  border-radius:18px;padding:1.8rem;transition:all .3s;cursor:pointer;position:relative;overflow:hidden;}
+.ai-card:hover{background:rgba(255,255,255,.22);transform:translateY(-4px);
+  box-shadow:0 16px 40px rgba(0,0,0,.2);}
+.ai-card-header{display:flex;align-items:center;gap:.8rem;margin-bottom:.8rem;}
+.ai-logo{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;
+  font-size:1.4rem;background:rgba(255,255,255,.15);}
+.ai-name{font-size:1rem;font-weight:800;color:#fff;}
+.ai-made{font-size:.65rem;color:rgba(255,255,255,.55);font-weight:500;}
+.ai-desc{font-size:.82rem;color:rgba(255,255,255,.72);line-height:1.6;}
+.ai-badge{position:absolute;top:.8rem;right:.8rem;background:rgba(255,255,255,.15);
+  color:#fff;font-size:.6rem;font-weight:700;padding:.15rem .5rem;border-radius:999px;
+  letter-spacing:1px;text-transform:uppercase;}
+
+/* ── GOALS ── */
+#goals{padding:5rem 3rem;}
+.goals-inner{max-width:1000px;margin:0 auto;}
+.goals-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:2.5rem;}
+.goal-card{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:2rem;
+  backdrop-filter:blur(12px);box-shadow:0 4px 20px var(--shadow);transition:all .3s;position:relative;overflow:hidden;}
+.goal-card:hover{transform:translateY(-4px);box-shadow:0 16px 44px rgba(2,132,199,.18);}
+.goal-num{font-family:'Fraunces',serif;font-size:4rem;font-weight:900;
+  color:rgba(2,132,199,.08);position:absolute;top:.5rem;right:1rem;line-height:1;}
+.goal-icon{font-size:2rem;margin-bottom:.8rem;}
+.goal-title{font-size:1.05rem;font-weight:700;color:var(--ink);margin-bottom:.5rem;}
+.goal-desc{font-size:.87rem;color:var(--muted);line-height:1.7;}
+
+/* ══════════════════════════════════
+   💕 DEVDEEP LOVE SECTION
+══════════════════════════════════ */
+
+/* Entry animation wrapper */
+.love-section-entry{
+  position:relative;
+  overflow:hidden;
+}
+/* Curtain reveal */
+.love-curtain{
+  position:absolute;inset:0;z-index:10;pointer-events:none;
+  background:linear-gradient(135deg,#2d0030,#5a0040);
+  transform-origin:top;
+  transition:transform 1.2s cubic-bezier(.77,0,.175,1);
+}
+.love-section-entry.revealed .love-curtain{
+  transform:scaleY(0);
+}
+/* Sparkle text before section */
+.love-divider{
+  height:120px;
+  background:linear-gradient(0deg,#2d0030 0%,transparent 100%);
+  position:relative;z-index:1;
+  display:flex;align-items:center;justify-content:center;overflow:hidden;
+}
+.love-divider-text{
+  font-family:'Dancing Script',cursive;
+  font-size:clamp(1.4rem,4vw,2.2rem);font-weight:700;
+  background:linear-gradient(135deg,#ff8fab,#ff1744,#ff4d7d);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  animation:shimmer 3s ease-in-out infinite;letter-spacing:2px;text-align:center;
+  padding:0 2rem;
+}
+@keyframes shimmer{
+  0%,100%{filter:brightness(1);}
+  50%{filter:brightness(1.3) drop-shadow(0 0 14px rgba(255,23,68,.6));}
+}
+
+#love{
+  padding:6rem 3rem;position:relative;overflow:hidden;
+  background:linear-gradient(135deg,#2d0030 0%,#5a0040 25%,#8b0058 50%,#5a0040 75%,#2d0030 100%);
+}
+#love::before{content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at 20% 40%,rgba(255,105,180,.22) 0%,transparent 55%),
+             radial-gradient(ellipse at 80% 60%,rgba(255,20,147,.2) 0%,transparent 55%),
+             radial-gradient(ellipse at 50% 100%,rgba(255,182,193,.1) 0%,transparent 40%);
+  pointer-events:none;}
+
+/* Touch hearts canvas */
+#love-hearts-canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:2;}
+
+/* Bg floating hearts — hidden until touch */
+.hearts-bg{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:0;display:none;}
+.hrt{position:absolute;font-size:1.2rem;opacity:0;}
+@keyframes riseHeart{
+  0%{transform:translateY(100vh) rotate(-15deg);opacity:0;}
+  10%{opacity:.6;}90%{opacity:.4;}
+  100%{transform:translateY(-10vh) rotate(15deg);opacity:0;}
+}
+
+.love-inner{max-width:900px;margin:0 auto;position:relative;z-index:3;}
+
+.love-names-badge{display:inline-flex;align-items:center;gap:.6rem;
+  background:rgba(255,255,255,.06);border:1px solid rgba(255,23,68,.5);
+  padding:.5rem 1.4rem;border-radius:999px;margin-bottom:1.5rem;}
+.love-names-badge span{font-family:'Dancing Script',cursive;font-size:1.3rem;font-weight:700;}
+.love-names-badge .name-dev{color:#ff8fab;}
+.love-names-badge .heart-icon{color:#ff1744;font-size:1.2rem;animation:heartbeat 1.4s ease-in-out infinite;}
+.love-names-badge .name-deep{color:#ff4d7d;}
+@keyframes heartbeat{0%,100%{transform:scale(1);}50%{transform:scale(1.3);}}
+
+.love-title-wrap{margin-bottom:2rem;}
+.love-super{font-family:'Plus Jakarta Sans',sans-serif;font-size:.75rem;
+  color:rgba(255,255,255,.5);letter-spacing:3px;text-transform:uppercase;margin-bottom:.5rem;}
+.love-title{font-family:'Dancing Script',cursive;font-size:clamp(3.5rem,10vw,7rem);
+  font-weight:700;line-height:1;
+  background:linear-gradient(135deg,#ff8fab 0%,#ff4d7d 35%,#ff1744 65%,#ff6b9d 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  letter-spacing:-1px;filter:drop-shadow(0 0 40px rgba(255,23,68,.5));}
+.love-subtitle{font-family:'Dancing Script',cursive;font-size:1.3rem;
+  color:rgba(255,255,255,.5);margin-top:.3rem;font-style:italic;}
+
+/* Touch instruction */
+.love-touch-hint{
+  display:inline-flex;align-items:center;gap:.5rem;margin-bottom:2rem;
+  background:rgba(255,23,68,.1);border:1px solid rgba(255,23,68,.3);
+  padding:.4rem 1rem;border-radius:999px;font-size:.75rem;color:rgba(255,100,130,.9);font-weight:600;
+  animation:pulseBorder 2s ease-in-out infinite;
+}
+@keyframes pulseBorder{
+  0%,100%{border-color:rgba(255,23,68,.25);}
+  50%{border-color:rgba(255,23,68,.7);box-shadow:0 0 16px rgba(255,23,68,.2);}
+}
+
+.love-letter{background:rgba(255,255,255,.05);border:1px solid rgba(255,23,68,.2);
+  border-radius:28px;padding:3rem;margin:2.5rem 0;position:relative;overflow:hidden;}
+.love-letter::before{content:'"';font-family:'Fraunces',serif;font-size:15rem;font-weight:900;
+  color:rgba(255,23,68,.06);position:absolute;top:-3rem;left:1rem;line-height:1;pointer-events:none;}
+.love-letter-text{font-family:'Dancing Script',cursive;font-size:1.35rem;
+  color:rgba(255,255,255,.88);line-height:2;position:relative;z-index:1;}
+.love-letter-text .hl{background:linear-gradient(135deg,#ff1744,#ff4d7d);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-weight:700;}
+.love-letter-text .gd{background:linear-gradient(135deg,#ff8fab,#ff4d7d);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-weight:700;}
+.love-letter-sign{margin-top:1.5rem;text-align:right;font-family:'Dancing Script',cursive;
+  font-size:1.2rem;background:linear-gradient(135deg,#ff8fab,#ff1744);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+
+.love-facts{display:grid;grid-template-columns:repeat(2,1fr);gap:1.2rem;margin:2rem 0;}
+.love-fact{background:rgba(255,255,255,.05);border:1px solid rgba(255,23,68,.15);
+  border-radius:18px;padding:1.5rem;transition:all .3s;position:relative;overflow:hidden;}
+.love-fact::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,#ff1744,#ff8fab);
+  transform:scaleX(0);transform-origin:left;transition:transform .4s;}
+.love-fact:hover{background:rgba(255,23,68,.08);transform:translateY(-3px);}
+.love-fact:hover::before{transform:scaleX(1);}
+.love-fact-icon{font-size:1.8rem;margin-bottom:.6rem;}
+.love-fact-title{font-size:.85rem;font-weight:700;color:rgba(255,255,255,.85);margin-bottom:.3rem;}
+.love-fact-desc{font-size:.82rem;color:rgba(255,255,255,.5);line-height:1.6;}
+
+.wedding-card{background:linear-gradient(135deg,rgba(255,23,68,.12),rgba(255,143,171,.1));
+  border:1px solid rgba(255,23,68,.35);border-radius:24px;padding:2.5rem;
+  text-align:center;margin-top:2rem;box-shadow:0 0 60px rgba(255,23,68,.08);}
+.wedding-card-title{font-family:'Dancing Script',cursive;font-size:1.6rem;font-weight:700;
+  color:rgba(255,255,255,.9);margin-bottom:.5rem;}
+.wedding-year{font-family:'Fraunces',serif;font-size:clamp(3rem,8vw,5rem);font-weight:900;
+  background:linear-gradient(135deg,#ff8fab,#ff4d7d,#ff1744);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  line-height:1;letter-spacing:-3px;filter:drop-shadow(0 0 20px rgba(255,23,68,.4));}
+.wedding-subtitle{font-family:'Dancing Script',cursive;font-size:1.1rem;
+  color:rgba(255,255,255,.5);margin-top:.5rem;}
+
+
+/* ── CONTACT ── */
+#contact{padding:5rem 3rem;background:rgba(255,255,255,.5);backdrop-filter:blur(8px);border-top:1px solid var(--border);}
+.contact-inner{max-width:700px;margin:0 auto;text-align:center;}
+.contact-desc{color:var(--muted);font-size:1rem;line-height:1.8;margin-bottom:2.5rem;}
+.contact-cards{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;}
+.contact-card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:2rem;
+  text-decoration:none;transition:all .3s;display:flex;flex-direction:column;align-items:center;gap:.7rem;
+  backdrop-filter:blur(12px);box-shadow:0 4px 20px var(--shadow);}
+.contact-card:hover{transform:translateY(-4px);box-shadow:0 16px 44px rgba(2,132,199,.2);border-color:var(--accent);}
+.contact-card.wa{border-color:rgba(37,211,102,.3);}
+.contact-card.wa:hover{border-color:#25d366;box-shadow:0 16px 44px rgba(37,211,102,.25);}
+.contact-card-icon{font-size:2rem;}
+.contact-card-label{font-size:.68rem;color:var(--muted);text-transform:uppercase;letter-spacing:2px;font-weight:600;}
+.contact-card-value{font-size:.9rem;color:var(--ink);font-weight:700;}
+
+footer{text-align:center;padding:2rem 1rem;border-top:1px solid var(--border);
+  font-size:.78rem;color:var(--muted);background:rgba(255,255,255,.4);}
+footer strong{color:var(--accent);}
+
+/* ── REVEAL ── */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease;}
+.reveal.visible{opacity:1;transform:none;}
+.reveal-left{opacity:0;transform:translateX(-30px);transition:opacity .7s ease,transform .7s ease;}
+.reveal-left.visible{opacity:1;transform:none;}
+.reveal-right{opacity:0;transform:translateX(30px);transition:opacity .7s ease,transform .7s ease;}
+.reveal-right.visible{opacity:1;transform:none;}
+
+/* ── RESPONSIVE ── */
+@media(max-width:768px){
+  nav{padding:1rem 1.5rem;}.nav-links{gap:.3rem;}
+  .nav-links a{padding:.4rem .5rem;font-size:.7rem;}
+  #hero{padding:6rem 1.5rem 3rem;}.hero-inner{grid-template-columns:1fr;}
+  .photo-card{display:none;}
+  .about-grid,.hobbies-grid,.goals-grid,.ai-grid,.love-facts,.mindset-grid,.contact-cards{grid-template-columns:1fr;}
+  #about,#hobbies,#goals,#aitools,#love,#contact,#mindset{padding:4rem 1.5rem;}
+  .stat-grid{grid-template-columns:1fr 1fr;}
+}
+</style>
+</head>
+<body>
+
+<div id="progress"></div>
+<div class="clouds">
+  <div class="cloud"></div><div class="cloud"></div>
+  <div class="cloud"></div><div class="cloud"></div><div class="cloud"></div>
+</div>
+
+<!-- NAV -->
+<nav id="mainNav">
+  <a href="#hero" class="logo">Dev<span>.</span></a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#hobbies">Hobbies</a></li>
+    <li><a href="#mindset">Mindset</a></li>
+    <li><a href="#aitools">AI Tools</a></li>
+    <li><a href="#goals">Goals</a></li>
+    <li><a href="#love" class="love-link">DevDeep 💕</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-inner">
+    <div class="hero-left">
+      <div class="hero-eyebrow">✦ Welcome to my world</div>
+      <h1 class="hero-name">
+        <span class="first">Dev</span>
+        <span class="last">Yadav.</span>
+      </h1>
+      <div class="hero-title">Dreamer · Builder · AI Enthusiast</div>
+      <p class="hero-desc">
+        I'm a <strong>17-year-old</strong> from India with an unstoppable mind. Every morning I wake up with a <strong>new idea</strong>. I'm learning web development &amp; AI — not just to write code, but to <strong>change the world</strong>, one idea at a time. 🚀
+      </p>
+      <div class="hero-btns">
+        <a href="https://wa.me/91XXXXXXXXXX?text=Hey%20Dev!%20I%20visited%20your%20website%20%F0%9F%91%8B" target="_blank" class="btn-whatsapp">
+          <svg class="wa-icon" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          WhatsApp Me
+        </a>
+        <a href="#aitools" class="btn btn-outline">My AI Ideas 💡</a>
+      </div>
+    </div>
+    <div class="photo-card" id="photoCard" onclick="document.getElementById('fileInput').click()">
+      <div class="photo-badge">My Photo</div>
+      <img id="photoPreview" src="" alt="Dev Yadav"/>
+      <div class="photo-placeholder" id="photoPlaceholder">
+        <div class="photo-placeholder-icon">📸</div>
+        <div class="photo-placeholder-text">Click to add<br/>your photo</div>
+      </div>
+      <input type="file" id="fileInput" accept="image/*"/>
+      <button class="photo-upload-btn" onclick="event.stopPropagation(); document.getElementById('fileInput').click()">📷 Upload My Photo</button>
+      <p style="font-size:.72rem;color:var(--muted);text-align:center;">Click anywhere on this card</p>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-inner">
+    <div class="section-chip reveal">// About Me</div>
+    <h2 class="section-title reveal">Who is <em>Dev Yadav?</em></h2>
+    <div class="about-grid">
+      <div class="about-text reveal-left">
+        <p>My name is <strong>Dev Yadav</strong>, and I'm <strong>17 years old</strong>. I'm a self-taught developer on a mission — building my first websites from scratch, just like this one. Every single day, I learn something new and push myself a little further.</p>
+        <p>But coding is only half of my story. I'm deeply passionate about <strong>Artificial Intelligence</strong>. I spend time every day understanding how AI works — how it thinks, how it learns, how it can solve real-world problems for real people.</p>
+        <div class="highlight">"My mind never stops. I wake up every morning with a new idea. Some days it's a small thought, some days it feels like it could change everything — and I write every single one down."</div>
+        <p>I believe that <strong>consistency + curiosity = success</strong>. I don't come from a big city or a fancy college. I just have fire in my eyes and dreams in my heart. That's enough to start. 🔥</p>
+      </div>
+      <div class="stat-grid reveal-right">
+        <div class="stat-card"><div class="stat-icon">🎂</div><div class="stat-val">17</div><div class="stat-label">Years Old</div></div>
+        <div class="stat-card"><div class="stat-icon">💡</div><div class="stat-val">2+</div><div class="stat-label">Ideas / Day</div></div>
+        <div class="stat-card"><div class="stat-icon">🧠</div><div class="stat-val">AI</div><div class="stat-label">Current Focus</div></div>
+        <div class="stat-card"><div class="stat-icon">🌍</div><div class="stat-val">India</div><div class="stat-label">Base Location</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOBBIES -->
+<section id="hobbies">
+  <div class="hobbies-inner">
+    <div class="section-chip reveal">// What I Love Doing</div>
+    <h2 class="section-title reveal">My <em>Hobbies</em></h2>
+    <div class="hobbies-grid">
+      <div class="hobby-card reveal">
+        <div class="hobby-emoji">🎬</div>
+        <div class="hobby-name">Content Creation</div>
+        <div class="hobby-desc">I love creating content — videos, posts, ideas — that connects with people. Telling stories, sharing thoughts and building an audience that genuinely feels something is my jam.</div>
+      </div>
+      <div class="hobby-card reveal">
+        <div class="hobby-emoji">📖</div>
+        <div class="hobby-name">Reading</div>
+        <div class="hobby-desc">Books open up a thousand worlds. I read about business, self-growth, technology and human psychology. Every book gives me a new lens to see life through.</div>
+      </div>
+      <div class="hobby-card reveal">
+        <div class="hobby-emoji">🎯</div>
+        <div class="hobby-name">Deep Focus Work</div>
+        <div class="hobby-desc">I love getting into a deep flow state — headphones on, phone away, all-in on one thing. When I focus fully, I surprise even myself with what I can create.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MINDSET -->
+<section id="mindset">
+  <canvas id="mindset-canvas"></canvas>
+  <div class="mindset-inner">
+    <div class="mindset-chip reveal">// How I Think</div>
+    <h2 class="mindset-title reveal">My Daily <em>Mindset</em></h2>
+    <p class="mindset-sub reveal">These are the thoughts that wake me up every morning and keep me going every night. Touch any card to feel the energy. ✨</p>
+    <div class="mindset-grid">
+
+      <div class="mindset-card reveal" data-dot>
+        <div class="dot-cursor"></div>
+        <div class="mindset-num">01</div>
+        <div class="mindset-icon">🔥</div>
+        <div class="mindset-card-title">Every Day is a New Chance</div>
+        <div class="mindset-card-desc">Yesterday doesn't define tomorrow. Every morning is a reset — a blank page. I wake up and ask: what can I build today that I couldn't yesterday?</div>
+        <span class="mindset-tag">Discipline</span>
+      </div>
+
+      <div class="mindset-card reveal" data-dot>
+        <div class="dot-cursor"></div>
+        <div class="mindset-num">02</div>
+        <div class="mindset-icon">💡</div>
+        <div class="mindset-card-title">Ideas are Seeds — Water Them</div>
+        <div class="mindset-card-desc">Every big company started as a thought in someone's mind. I write every idea down. One of them — maybe today's, maybe tomorrow's — will change everything.</div>
+        <span class="mindset-tag">Innovation</span>
+      </div>
+
+      <div class="mindset-card reveal" data-dot>
+        <div class="dot-cursor"></div>
+        <div class="mindset-num">03</div>
+        <div class="mindset-icon">🚫</div>
+        <div class="mindset-card-title">Excuses Don't Build Empires</div>
+        <div class="mindset-card-desc">No phone, no internet, no resources — all excuses. The most successful people started with less. I stopped making excuses the day I decided to start.</div>
+        <span class="mindset-tag">Mindset</span>
+      </div>
+
+      <div class="mindset-card reveal" data-dot>
+        <div class="dot-cursor"></div>
+        <div class="mindset-num">04</div>
+        <div class="mindset-icon">🌱</div>
+        <div class="mindset-card-title">Learn Something. Every. Single. Day.</div>
+        <div class="mindset-card-desc">Even 30 minutes of focused learning daily = 180+ hours per year. Compounded over years, that's mastery. I am never not learning.</div>
+        <span class="mindset-tag">Growth</span>
+      </div>
+
+      <div class="mindset-card reveal" data-dot>
+        <div class="dot-cursor"></div>
+        <div class="mindset-num">05</div>
+        <div class="mindset-icon">🤝</div>
+        <div class="mindset-card-title">Build People, Not Just Products</div>
+        <div class="mindset-card-desc">Real success is not just in what you create — it's in who you lift along the way. I want to build things that make someone's life genuinely easier.</div>
+        <span class="mindset-tag">Purpose</span>
+      </div>
+
+      <div class="mindset-card reveal" data-dot>
+        <div class="dot-cursor"></div>
+        <div class="mindset-num">06</div>
+        <div class="mindset-icon">⚡</div>
+        <div class="mindset-card-title">AI is the Superpower of Our Generation</div>
+        <div class="mindset-card-desc">Those who learn to use AI today will lead tomorrow. I'm not waiting for the future — I'm preparing for it right now, one tool at a time.</div>
+        <span class="mindset-tag">AI &amp; Future</span>
+      </div>
+
+      <div class="mindset-card reveal" data-dot>
+        <div class="dot-cursor"></div>
+        <div class="mindset-num">07</div>
+        <div class="mindset-icon">🧘</div>
+        <div class="mindset-card-title">Stay Calm, Think Big</div>
+        <div class="mindset-card-desc">Anxiety builds nothing. Clarity builds everything. When things get hard, I slow down, breathe and ask: what's the next small step? Then I take it.</div>
+        <span class="mindset-tag">Clarity</span>
+      </div>
+
+      <div class="mindset-card reveal" data-dot>
+        <div class="dot-cursor"></div>
+        <div class="mindset-num">08</div>
+        <div class="mindset-icon">🏆</div>
+        <div class="mindset-card-title">Compete Only With Yesterday's You</div>
+        <div class="mindset-card-desc">The only competition that matters is between who I was yesterday and who I am today. If I'm 1% better every day, a year from now I'll be unrecognizable.</div>
+        <span class="mindset-tag">Self-Growth</span>
+      </div>
+
+    </div>
+    <div class="mindset-hint reveal">
+      <div class="mindset-hint-dot"></div>
+      Touch or hover any card — feel the energy
+      <div class="mindset-hint-dot"></div>
+    </div>
+  </div>
+</section>
+
+<!-- AI TOOLS -->
+<section id="aitools">
+  <div class="aitools-inner">
+    <div class="ai-chip reveal">// Tools I Use &amp; Learn</div>
+    <h2 class="ai-title reveal">Top AI Tools 🤖</h2>
+    <p class="ai-sub reveal">These are the AI tools I study, use and experiment with daily. The future belongs to those who master these tools early. I'm starting now. 🚀</p>
+    <div class="ai-grid">
+
+      <div class="ai-card reveal">
+        <div class="ai-badge">My Fav</div>
+        <div class="ai-card-header">
+          <div class="ai-logo">🤖</div>
+          <div><div class="ai-name">ChatGPT</div><div class="ai-made">by OpenAI</div></div>
+        </div>
+        <div class="ai-desc">The world's most popular AI assistant. I use it to learn concepts, debug ideas, write and brainstorm. It's like having a brilliant teacher available 24/7.</div>
+      </div>
+
+      <div class="ai-card reveal">
+        <div class="ai-badge">Daily Use</div>
+        <div class="ai-card-header">
+          <div class="ai-logo">🧠</div>
+          <div><div class="ai-name">Claude</div><div class="ai-made">by Anthropic</div></div>
+        </div>
+        <div class="ai-desc">Claude thinks deeply and writes beautifully. I use it for long-form content, understanding complex topics and crafting creative writing. Very thoughtful AI.</div>
+      </div>
+
+      <div class="ai-card reveal">
+        <div class="ai-card-header">
+          <div class="ai-logo">✨</div>
+          <div><div class="ai-name">Gemini</div><div class="ai-made">by Google</div></div>
+        </div>
+        <div class="ai-desc">Google's powerful AI that works across text, images and code. Great for research, understanding documents and getting quick factual answers.</div>
+      </div>
+
+      <div class="ai-card reveal">
+        <div class="ai-card-header">
+          <div class="ai-logo">🎨</div>
+          <div><div class="ai-name">Midjourney</div><div class="ai-made">AI Image Gen</div></div>
+        </div>
+        <div class="ai-desc">Creates stunning AI-generated images from just a text prompt. I use it to visualize my startup ideas, create thumbnails and explore visual creativity.</div>
+      </div>
+
+      <div class="ai-card reveal">
+        <div class="ai-card-header">
+          <div class="ai-logo">💻</div>
+          <div><div class="ai-name">GitHub Copilot</div><div class="ai-made">by GitHub × OpenAI</div></div>
+        </div>
+        <div class="ai-desc">An AI pair-programmer that writes code alongside you. As I learn HTML, CSS and JavaScript, Copilot helps me understand patterns and write better code faster.</div>
+      </div>
+
+      <div class="ai-card reveal">
+        <div class="ai-card-header">
+          <div class="ai-logo">🎬</div>
+          <div><div class="ai-name">Runway ML</div><div class="ai-made">AI Video Gen</div></div>
+        </div>
+        <div class="ai-desc">Generate and edit videos using AI. For my content creation hobby, this is a game-changer. It lets me create professional-quality visuals without any editing experience.</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- GOALS -->
+<section id="goals">
+  <div class="goals-inner">
+    <div class="section-chip reveal">// My Dreams</div>
+    <h2 class="section-title reveal">My <em>Goals</em></h2>
+    <div class="goals-grid">
+      <div class="goal-card reveal">
+        <div class="goal-num">01</div>
+        <div class="goal-icon">💻</div>
+        <div class="goal-title">Become a Full Stack Developer</div>
+        <div class="goal-desc">Master web development front to back. Build complete, real-world applications that people actually use and love.</div>
+      </div>
+      <div class="goal-card reveal">
+        <div class="goal-num">02</div>
+        <div class="goal-icon">🤖</div>
+        <div class="goal-title">Learn AI &amp; Machine Learning</div>
+        <div class="goal-desc">Deep dive into Python and how AI models work. I don't just want to use AI tools — I want to build them from scratch.</div>
+      </div>
+      <div class="goal-card reveal">
+        <div class="goal-num">03</div>
+        <div class="goal-icon">🚀</div>
+        <div class="goal-title">Launch My Own Startup</div>
+        <div class="goal-desc">Turn one of my daily ideas into a real product — starting from India, going to the world.</div>
+      </div>
+      <div class="goal-card reveal">
+        <div class="goal-num">04</div>
+        <div class="goal-icon">🌟</div>
+        <div class="goal-title">Inspire Others Like Me</div>
+        <div class="goal-desc">Show that a kid from a small town with no fancy degree can build something meaningful with just passion and consistency.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ✨ DEVDEEP DIVIDER -->
+<div class="love-divider" style="background:linear-gradient(0deg,#1a0010 0%,var(--sky2) 100%);">
+  <div class="love-divider-text reveal">
+    ✨ &nbsp; A little more about me — the part closest to my heart &nbsp; ✨
+  </div>
+</div>
+
+<!-- 💕 LOVE SECTION -->
+<section id="love" class="love-section-entry">
+  <div class="love-curtain" id="loveCurtain"></div>
+  <canvas id="love-hearts-canvas"></canvas>
+
+  <div class="hearts-bg">
+    <div class="hrt">💕</div><div class="hrt">❤️</div>
+    <div class="hrt">💜</div><div class="hrt">💗</div>
+    <div class="hrt">🩷</div><div class="hrt">💖</div>
+    <div class="hrt">✨</div><div class="hrt">💕</div>
+  </div>
+
+  <div class="love-inner">
+    <div class="love-names-badge reveal">
+      <span class="name-dev">Dev</span>
+      <span class="heart-icon">♥</span>
+      <span class="name-deep">Deep</span>
+    </div>
+
+    <div class="love-title-wrap reveal">
+      <div class="love-super">Our Love Story</div>
+      <div class="love-title">DevDeep ❤️</div>
+      <div class="love-subtitle">Two souls, one beautiful story...</div>
+    </div>
+
+    <div class="love-touch-hint reveal">
+      💕 &nbsp; Touch or hold anywhere in this section — something magical happens
+    </div>
+
+    <div class="love-letter reveal">
+      <div class="love-letter-text">
+        They say some people walk into your life and quietly become everything.<br/>
+        That's exactly what <span class="hl">Deep</span> did to me.<br/><br/>
+        She is not just my <span class="hl">love</span> — she is my calm, my strength,
+        my reason to become better every single day.
+        When the whole world feels heavy, one message from her makes everything
+        feel <span class="gd">light again.</span><br/><br/>
+        She is <span class="hl">beautiful</span> — inside and out. The kind of beautiful
+        that stays with you. Her smile can fix the worst of my days in a heartbeat.<br/><br/>
+        She <span class="hl">cares</span> for me in ways I never even asked for.
+        She notices the little things. She listens without judging.
+        She stands by me even when I am still figuring myself out.
+        That kind of loyalty is rare — and I never take it for granted.<br/><br/>
+        She <span class="gd">believes in me</span> when I don't believe in myself.
+        When I share my big, crazy dreams, she doesn't laugh —
+        she listens, supports, pushes me forward.
+        Having someone like that by your side is not luck.
+        It is a <span class="hl">blessing.</span><br/><br/>
+        We named ourselves <span class="hl">DevDeep</span> — because we are not two
+        separate stories anymore. We are one name, one future, one dream.
+      </div>
+      <div class="love-letter-sign">— Dev, always yours 💜</div>
+    </div>
+
+    <div class="love-facts">
+      <div class="love-fact reveal">
+        <div class="love-fact-icon">💎</div>
+        <div class="love-fact-title">She is Loyal — Always</div>
+        <div class="love-fact-desc">In a world full of distractions, she chooses me every single day. That loyalty is more precious than anything else in this world.</div>
+      </div>
+      <div class="love-fact reveal">
+        <div class="love-fact-icon">🌸</div>
+        <div class="love-fact-title">She Cares Deeply</div>
+        <div class="love-fact-desc">Her care is in the small things — the way she checks on me, remembers the tiniest details, and makes sure I never feel alone.</div>
+      </div>
+      <div class="love-fact reveal">
+        <div class="love-fact-icon">✨</div>
+        <div class="love-fact-title">Beautifully Her</div>
+        <div class="love-fact-desc">She doesn't just look beautiful — she radiates it. Her kindness, her warmth, her smile — everything about her is beauty that words can barely capture.</div>
+      </div>
+      <div class="love-fact reveal">
+        <div class="love-fact-icon">🤝</div>
+        <div class="love-fact-title">My Biggest Supporter</div>
+        <div class="love-fact-desc">Behind every dream I chase, she's there. She listens to every idea, every plan, every crazy thought — and somehow makes me believe I can actually do it all.</div>
+      </div>
+    </div>
+
+    <div class="wedding-card reveal">
+      <div class="wedding-card-title">💍 Our Wedding Year</div>
+      <div class="wedding-year">2032</div>
+      <div class="wedding-subtitle">Dev &amp; Deep — A promise written in the stars ✨</div>
+      <p style="margin-top:1.8rem;font-family:'Dancing Script',cursive;font-size:1.25rem;color:rgba(255,255,255,.7);line-height:1.8;">
+        In <strong style="-webkit-text-fill-color:transparent;background:linear-gradient(135deg,#fbbf24,#ff6b9d,#ff1744);-webkit-background-clip:text;background-clip:text;font-size:1.4rem;">2032</strong>, I will marry the most beautiful girl in my world. 💍<br/>
+        Not because someone told me to — but because I chose her,<br/>
+        every single day, for all these years. That's love. That's loyalty.<br/>
+        That's <span style="-webkit-text-fill-color:transparent;background:linear-gradient(135deg,#ff8fab,#ff1744);-webkit-background-clip:text;background-clip:text;font-weight:700;">DevDeep.</span>
+      </p>
+      <div style="margin-top:2rem;display:flex;align-items:center;justify-content:center;gap:1.5rem;flex-wrap:wrap;">
+        <div style="text-align:center;">
+          <div style="font-family:'Fraunces',serif;font-size:3.5rem;font-weight:900;background:linear-gradient(135deg,#ff8fab,#ff1744);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;">💍</div>
+          <div style="font-size:.7rem;color:rgba(255,255,255,.4);letter-spacing:2px;text-transform:uppercase;margin-top:.3rem;">Forever Loyal</div>
+        </div>
+        <div style="text-align:center;">
+          <div style="font-family:'Dancing Script',cursive;font-size:3rem;font-weight:700;background:linear-gradient(135deg,#fbbf24,#ff6b9d);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;">2032</div>
+          <div style="font-size:.7rem;color:rgba(255,255,255,.4);letter-spacing:2px;text-transform:uppercase;margin-top:.3rem;">Our Year</div>
+        </div>
+        <div style="text-align:center;">
+          <div style="font-family:'Fraunces',serif;font-size:3.5rem;font-weight:900;background:linear-gradient(135deg,#ff8fab,#ff1744);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;">❤️</div>
+          <div style="font-size:.7rem;color:rgba(255,255,255,.4);letter-spacing:2px;text-transform:uppercase;margin-top:.3rem;">Always Yours</div>
+        </div>
+      </div>
+      <p style="margin-top:2rem;font-family:'Dancing Script',cursive;font-size:1.1rem;color:rgba(255,255,255,.4);font-style:italic;">
+        "Till 2032 and every year after that — I'm yours, always, Dev." 💕
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-inner">
+    <div class="section-chip reveal">// Let's Connect</div>
+    <h2 class="section-title reveal">Get In <em>Touch</em> 👋</h2>
+    <p class="contact-desc reveal">Have an idea? Want to collaborate? Just want to say hello? I'm always happy to hear from you! 😊</p>
+    <div class="contact-cards reveal">
+      <a href="https://wa.me/91XXXXXXXXXX?text=Hey%20Dev!%20I%20visited%20your%20website%20%F0%9F%91%8B" target="_blank" class="contact-card wa">
+        <div class="contact-card-icon">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="#25d366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        </div>
+        <div class="contact-card-label">WhatsApp — Message Me Directly</div>
+        <div class="contact-card-value" style="color:#25d366;">Click to Open WhatsApp 💬</div>
+      </a>
+      <a href="/cdn-cgi/l/email-protection#680c0d1e280d05090104460b0705" class="contact-card">
+        <div class="contact-card-icon">📧</div>
+        <div class="contact-card-label">Email</div>
+        <div class="contact-card-value"><span class="__cf_email__" data-cfemail="e7838291a7828a868e8bc984888a">[email&#160;protected]</span></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Built with 💙 &amp; lots of ☕ by <strong>Dev Yadav</strong> &nbsp;•&nbsp; © 2025 &nbsp;•&nbsp; Hand-coded while chasing dreams 🚀</p>
+  <p style="margin-top:.4rem;font-family:'Dancing Script',cursive;font-size:.95rem;color:#ff4d7d;">DevDeep ❤️ — Forever &amp; Always</p>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+// ── PHOTO UPLOAD ──
+document.getElementById('fileInput').addEventListener('change',function(e){
+  const file=e.target.files[0];if(!file)return;
+  const reader=new FileReader();
+  reader.onload=function(ev){
+    const p=document.getElementById('photoPreview');
+    const ph=document.getElementById('photoPlaceholder');
+    p.src=ev.target.result;p.style.display='block';ph.style.display='none';
+    document.getElementById('photoCard').classList.add('has-photo');
+  };reader.readAsDataURL(file);
+});
+
+// ── PROGRESS BAR ──
+window.addEventListener('scroll',function(){
+  const d=document.documentElement;
+  const sc=d.scrollTop||document.body.scrollTop;
+  const sh=d.scrollHeight-d.clientHeight;
+  document.getElementById('progress').style.width=(sc/sh*100)+'%';
+  document.getElementById('mainNav').classList.toggle('scrolled',sc>50);
+});
+
+// ── ACTIVE NAV ──
+const sections=document.querySelectorAll('section[id]');
+const navLinks=document.querySelectorAll('.nav-links a');
+window.addEventListener('scroll',function(){
+  let cur='';
+  sections.forEach(s=>{
+    if(window.scrollY>=s.offsetTop-100)cur=s.id;
+  });
+  navLinks.forEach(a=>{
+    a.classList.remove('active');
+    if(a.getAttribute('href')==='#'+cur)a.classList.add('active');
+  });
+},{ passive:true });
+
+// ── SCROLL REVEAL ──
+const allReveal=document.querySelectorAll('.reveal,.reveal-left,.reveal-right');
+const obs=new IntersectionObserver((entries)=>{
+  entries.forEach((e,i)=>{
+    if(e.isIntersecting)setTimeout(()=>e.target.classList.add('visible'),i*70);
+  });
+},{threshold:0.08});
+allReveal.forEach(el=>obs.observe(el));
+
+// ── LOVE SECTION CURTAIN REVEAL ──
+const loveSection=document.getElementById('love');
+const loveCurtain=document.getElementById('loveCurtain');
+const loveObs=new IntersectionObserver((entries)=>{
+  if(entries[0].isIntersecting){
+    loveSection.classList.add('revealed');
+    loveObs.disconnect();
+  }
+},{threshold:0.1});
+loveObs.observe(loveSection);
+
+// ── TOUCH HEARTS ON LOVE SECTION ──
+const heartsCanvas=document.getElementById('love-hearts-canvas');
+const hCtx=heartsCanvas.getContext('2d');
+const heartEmojis=['💕','❤️','💜','💗','🩷','💖','✨','💝','🌹'];
+let heartParticles=[];
+let isPointerDown=false;
+let heartInterval=null;
+
+function resizeHeartsCanvas(){
+  heartsCanvas.width=loveSection.offsetWidth;
+  heartsCanvas.height=loveSection.offsetHeight;
+}
+resizeHeartsCanvas();
+window.addEventListener('resize',resizeHeartsCanvas);
+
+function spawnHeart(x,y){
+  heartParticles.push({
+    x,y,
+    emoji:heartEmojis[Math.floor(Math.random()*heartEmojis.length)],
+    size:20+Math.random()*28,
+    vx:(Math.random()-.5)*2.5,
+    vy:-(2+Math.random()*3),
+    alpha:1,
+    rotation:(Math.random()-.5)*0.5
+  });
+}
+
+function animateHearts(){
+  hCtx.clearRect(0,0,heartsCanvas.width,heartsCanvas.height);
+  heartParticles=heartParticles.filter(p=>p.alpha>0.01);
+  heartParticles.forEach(p=>{
+    p.x+=p.vx;p.y+=p.vy;p.alpha-=0.018;p.vy*=0.99;
+    hCtx.globalAlpha=p.alpha;
+    hCtx.font=p.size+'px serif';
+    hCtx.fillText(p.emoji,p.x,p.y);
+  });
+  hCtx.globalAlpha=1;
+  requestAnimationFrame(animateHearts);
+}
+animateHearts();
+
+function startSpawning(x,y){
+  let lx=x,ly=y;
+  spawnHeart(lx,ly);
+  heartInterval=setInterval(()=>spawnHeart(lx+( Math.random()-.5)*40,ly+(Math.random()-.5)*40),80);
+}
+function stopSpawning(){clearInterval(heartInterval);heartInterval=null;}
+
+function getRelPos(e,el){
+  const r=el.getBoundingClientRect();
+  let cx,cy;
+  if(e.touches){cx=e.touches[0].clientX;cy=e.touches[0].clientY;}
+  else{cx=e.clientX;cy=e.clientY;}
+  return{x:cx-r.left,y:cy-r.top};
+}
+
+loveSection.addEventListener('mousedown',function(e){
+  isPointerDown=true;const p=getRelPos(e,loveSection);startSpawning(p.x,p.y);
+});
+loveSection.addEventListener('mouseup',function(){isPointerDown=false;stopSpawning();});
+loveSection.addEventListener('mousemove',function(e){
+  if(!isPointerDown)return;
+  const p=getRelPos(e,loveSection);
+  spawnHeart(p.x,p.y);
+});
+loveSection.addEventListener('touchstart',function(e){
+  isPointerDown=true;const p=getRelPos(e,loveSection);startSpawning(p.x,p.y);
+},{passive:true});
+loveSection.addEventListener('touchend',function(){isPointerDown=false;stopSpawning();});
+loveSection.addEventListener('touchmove',function(e){
+  if(!isPointerDown)return;
+  const p=getRelPos(e,loveSection);spawnHeart(p.x,p.y);
+},{passive:true});
+
+// ── MINDSET DOT CURSOR ──
+document.querySelectorAll('[data-dot]').forEach(card=>{
+  const dot=card.querySelector('.dot-cursor');
+  card.addEventListener('mouseenter',()=>dot.style.opacity='1');
+  card.addEventListener('mouseleave',()=>dot.style.opacity='0');
+  card.addEventListener('mousemove',function(e){
+    const r=card.getBoundingClientRect();
+    dot.style.left=(e.clientX-r.left)+'px';
+    dot.style.top=(e.clientY-r.top)+'px';
+  });
+  card.addEventListener('touchstart',function(e){
+    dot.style.opacity='1';
+    const r=card.getBoundingClientRect();
+    dot.style.left=(e.touches[0].clientX-r.left)+'px';
+    dot.style.top=(e.touches[0].clientY-r.top)+'px';
+  },{passive:true});
+  card.addEventListener('touchend',()=>dot.style.opacity='0');
+  card.addEventListener('touchmove',function(e){
+    const r=card.getBoundingClientRect();
+    dot.style.left=(e.touches[0].clientX-r.left)+'px';
+    dot.style.top=(e.touches[0].clientY-r.top)+'px';
+  },{passive:true});
+});
+
+// ── MINDSET CANVAS DOTS ──
+const mc=document.getElementById('mindset-canvas');
+const mCtx=mc.getContext('2d');
+let mDots=[];
+function resizeMC(){mc.width=mc.parentElement.offsetWidth;mc.height=mc.parentElement.offsetHeight;}
+resizeMC();window.addEventListener('resize',resizeMC);
+for(let i=0;i<80;i++){
+  mDots.push({x:Math.random()*mc.width,y:Math.random()*mc.height,
+    r:.5+Math.random()*1.5,vx:(Math.random()-.5)*.3,vy:(Math.random()-.5)*.3,
+    a:.1+Math.random()*.4});
+}
+function animateDots(){
+  mCtx.clearRect(0,0,mc.width,mc.height);
+  mDots.forEach(d=>{
+    d.x+=d.vx;d.y+=d.vy;
+    if(d.x<0||d.x>mc.width)d.vx*=-1;
+    if(d.y<0||d.y>mc.height)d.vy*=-1;
+    mCtx.beginPath();mCtx.arc(d.x,d.y,d.r,0,Math.PI*2);
+    mCtx.fillStyle='rgba(56,189,248,'+d.a+')';mCtx.fill();
+  });
+  // draw lines between close dots
+  for(let i=0;i<mDots.length;i++){
+    for(let j=i+1;j<mDots.length;j++){
+      const dx=mDots[i].x-mDots[j].x,dy=mDots[i].y-mDots[j].y;
+      const dist=Math.sqrt(dx*dx+dy*dy);
+      if(dist<100){
+        mCtx.beginPath();mCtx.moveTo(mDots[i].x,mDots[i].y);mCtx.lineTo(mDots[j].x,mDots[j].y);
+        mCtx.strokeStyle='rgba(56,189,248,'+(0.1*(1-dist/100))+')';mCtx.lineWidth=.5;mCtx.stroke();
+      }
+    }
+  }
+  requestAnimationFrame(animateDots);
+}
+animateDots();
+
+// No countdown needed — 2032 is the year!
+</script>
+</body>
+</html>
